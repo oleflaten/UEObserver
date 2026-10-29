@@ -1,16 +1,14 @@
 // OEF 2026
 
-
 #include "MyNPC.h"
 #include "Components/StaticMeshComponent.h"
 #include "MyPawn.h"
 #include "Kismet/GameplayStatics.h"
 
-// Sets default values
 AMyNPC::AMyNPC()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bCanEverTick = false;
 
    MeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshComponent"));
 	SetRootComponent(MeshComponent);
@@ -29,7 +27,6 @@ AMyNPC::AMyNPC()
 	}
 }
 
-// Called when the game starts or when spawned
 void AMyNPC::BeginPlay()
 {
 	Super::BeginPlay();
@@ -37,20 +34,15 @@ void AMyNPC::BeginPlay()
 	MyPawnReference = Cast<AMyPawn>(UGameplayStatics::GetPlayerPawn(GetWorld(), 0));
 
 	if (MyPawnReference)
+	{
+		//											whos function, which function
 		MyPawnReference->OnPawnSomeEventOne.AddDynamic(this, &AMyNPC::GetLarger);
-	
+	}
 }
 
 void AMyNPC::GetLarger(AMyPawn* PawnThatSentThis)
 {
 	UE_LOG(LogTemp, Warning, TEXT("AMyNPC::GetLarger called by %s"), *PawnThatSentThis->GetName());
 	SetActorScale3D(GetActorScale3D() * 1.05f);
-}
-
-// Called every frame
-void AMyNPC::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-
 }
 

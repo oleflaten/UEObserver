@@ -9,10 +9,6 @@
 class UCameraComponent;
 class USceneComponent;
 
-UDELEGATE(BlueprintCallable)
-//										   Delegate name, parameter type, parameter name
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnPawnSomeEvent, AMyPawn*, PawnDidSomeEvent);
-
 UCLASS()
 class UEOBSERVER_API AMyPawn : public APawn
 {
@@ -21,12 +17,16 @@ class UEOBSERVER_API AMyPawn : public APawn
 public:
 	AMyPawn();
 
+	UDELEGATE(BlueprintCallable)
+	//										   Delegate name, parameter type, optional parameter name
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnPawnSomeEvent, AMyPawn*, PawnDidSomeEvent);
+	
+	// The delegate object
+	UPROPERTY(BlueprintAssignable)
 	FOnPawnSomeEvent OnPawnSomeEventOne;
 
+	// Function called by SpaceBar - from PlayerController
 	void DoSomeEvent();
-
-protected:
-	virtual void BeginPlay() override;
 
 private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))

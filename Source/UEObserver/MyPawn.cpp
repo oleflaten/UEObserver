@@ -1,6 +1,5 @@
 // OEF 2026
 
-
 #include "MyPawn.h"
 #include "Camera/CameraComponent.h"
 
@@ -20,12 +19,6 @@ AMyPawn::AMyPawn()
 
     FirstPersonCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("FirstPersonCamera"));
     FirstPersonCamera->SetupAttachment(RootScene);
-}
-
-void AMyPawn::BeginPlay()
-{
-	Super::BeginPlay();
-	
 }
 
 void AMyPawn::DoSomeEvent()
