@@ -6,3 +6,8 @@
 /DerivedDataCache
 /Intermediate
 /Saved
+.DS_Store
+/Build
+*.xcworkspacedata
+*.xcsettings
+/.idea
